@@ -1,0 +1,86 @@
+services:
+
+  #RE Cluster - Node 1
+  re1:
+    image: redislabs/redis:latest
+    container_name: re1
+    restart: unless-stopped
+    tty: true
+    cap_add: 
+      - sys_resource
+    profiles: ["oracle"]
+    ports:
+      - "12000:12000"
+      - "8443:8443"
+      - "9443:9443"
+    networks:
+      re_cluster:
+        ipv4_address: 192.168.20.2
+
+  #RE Cluster - Node 2
+  re2:
+    image: redislabs/redis:latest
+    container_name: re2
+    restart: unless-stopped
+    tty: true
+    cap_add: 
+      - sys_resource
+    profiles: ["oracle"]
+
+    networks:
+      re_cluster:
+        ipv4_address: 192.168.20.3
+
+  #RE Cluster - Node 3
+  re3:
+    image: redislabs/redis:latest
+    container_name: re3
+    restart: unless-stopped
+    tty: true
+    cap_add: 
+      - sys_resource
+    profiles: ["oracle"]
+    ports:
+      - "13000:13000"
+    networks:
+      re_cluster:
+        ipv4_address: 192.168.20.4
+
+  oracle:
+    image: container-registry.oracle.com/database/enterprise:latest
+    container_name: oracle
+    ports:
+     - 1521:1521
+    environment:
+     - ORACLE_SID=ORCLCDB 
+     - ORACLE_EDITION=enterprise
+     - ORACLE_PWD=Password1
+     - INIT_SGA_SIZE=1024
+     - INIT_PGA_SIZE=1024
+    volumes:
+      - $PWD/oracle/scripts:/opt/oracle/scripts/startup
+    profiles: ["oracle"]
+    networks:
+      re_cluster:
+        ipv4_address: 192.168.20.5
+
+  debezium:
+    build: 
+      context: $PWD/debezium
+    container_name: debezium
+    volumes:
+      - $PWD/debezium/application.properties:/debezium/conf/application.properties
+    profiles: ["debezium"]
+    networks:
+      re_cluster:
+        ipv4_address: 192.168.20.6
+
+#Docker Networks
+networks:
+  re_cluster:
+    name: re_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.20.0/24

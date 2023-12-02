@@ -1,0 +1,21 @@
+{
+  "name": "artist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "index": "node ./src/index.js",
+    "test": "npm run index && node ./src/test.js",
+    "deploy": "gears-api ./src/artist.js -r redis://default:redis@localhost:12000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "See LICENSE",
+  "type": "module",
+  "dependencies": {
+    "redis": "^4.6.11"
+  },
+  "devDependencies": {
+    "@redis/gears-api": "https://gitpkg.now.sh/RedisGears/RedisGears/js_api"
+  }
+}
