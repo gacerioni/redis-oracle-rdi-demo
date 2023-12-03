@@ -566,7 +566,7 @@ FT.SEARCH idx * SORTBY SONGS DESC LIMIT 0 10
    4) "{\"ARTISTID\":52,\"NAME\":\"Kiss\",\"SONGS\":35}"
 ```
 ### Redis Search Option 2 - Redis Function
-In this option, I've written a Redis Function that performs the gathering of data.  The function is written in Javascript and executes in a V8 interpreter on Redis.
+In this option, we use a Redis Function to perform the data gathering.  The function is written in Javascript and executes in a V8 interpreter on Redis.
 
 ![function](images/SearchSQL_Function.jpg) 
 
