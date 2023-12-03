@@ -23,6 +23,9 @@ This is a series of comparisons of equivalent SQL and Redis Search commands agai
 ## Architecture <a name="architecture"></a>
 ![architecture](images/SearchSQL_Arch_High.jpg) 
 
+## Redis Enterprise Config <a name="rladmin"></a>
+![rladmin](images/rladmin.png)
+
 ## Data Set In RedisInsight <a name="dataset"></a>
 ![dataset](images/screenshot-1.png)
 
@@ -564,6 +567,9 @@ FT.SEARCH idx * SORTBY SONGS DESC LIMIT 0 10
 ```
 ### Redis Search Option 2 - Redis Function
 In this option, I've written a Redis Function that performs the gathering of data.  The function is written in Javascript and executes in a V8 interpreter on Redis.
+
+![function](images/SearchSQL_Function.jpg) 
+
 ### Index - Javascript Snippet
 ```javascript
     try { 
