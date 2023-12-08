@@ -35,7 +35,7 @@ async function getGenreId(asyncClient, name) {
 async function getAlbumIds(asyncClient, genreId) {
     let albumIds = [];
     let cmd = ['FT.AGGREGATE', TRACK_INDEX, `'@genreId:[${genreId} ${genreId}]'`, 'LOAD', '3', 
-        '$.ALBUMID', 'AS', 'albumId', 'WITHCURSOR', 'COUNT', '10'];
+        '$.ALBUMID', 'AS', 'albumId', 'WITHCURSOR', 'COUNT', '1000'];
     let response = await asyncClient.block((c) => {
         return c.callAsync(...cmd);
     });
