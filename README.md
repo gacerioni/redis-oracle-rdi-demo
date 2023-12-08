@@ -430,7 +430,7 @@ FT.AGGREGATE idx "@InvoiceId:[37 37]" GROUPBY 0 REDUCE COUNT 0 as Count
    2) "4"
 ```
 
-## Query Scenario 8 <a name="scenario9"></a>
+## Query Scenario 8 <a name="scenario8"></a>
 Which artists have written the most Rock music?
 ### SQL Option 1 - 4 x Table JOIN
 #### Query
