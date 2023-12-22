@@ -1,4 +1,4 @@
-FROM debezium/server:latest
+FROM quay.io/debezium/server:latest
 USER root
 RUN microdnf -y install unzip && \
 microdnf clean all
