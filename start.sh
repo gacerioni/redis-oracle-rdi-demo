@@ -1,6 +1,6 @@
 #!/bin/bash
 # Maker: Joey Whelan
-# Usage: run.sh
+# Usage: start.sh
 # Description:  Starts a 3-node Redis Enterprise cluster + Oracle Enterprise, builds a Redis target DB, 
 # builds a source DB, builds a Redis DI sink DB, deploys Redis DI, starts a Debezium container
 
