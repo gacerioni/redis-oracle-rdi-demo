@@ -499,7 +499,7 @@ FETCH FIRST 10 ROWS ONLY;
         52 Kiss                                   35 
 ```
 ### Redis Search Option 1 - Materialized View CDC
-In this option, we make use of the CDC of the matierialized view created above.  It's important to note this method of
+In this option, we make use of the CDC of the materialized view created above.  It's important to note this method of
 performing Redis Search against an equivalent SQL JOIN will only work with Oracle.  Materialized views and/or CDC of them does not work with Postgres, MySQL, MSSQL.
 #### Materialized View in RedisInsight
 ![rockview](images/screenshot-2.png)
