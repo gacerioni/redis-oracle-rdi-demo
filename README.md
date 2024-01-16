@@ -461,7 +461,7 @@ FETCH FIRST 10 ROWS ONLY;
 
 ```
 ### SQL Option 2 - Materialized View
-In this case, we build a materialize view of the same SELECT/JOIN above.  Debezium, and subsequently RE/RDI, can perform CDC on this view if we also turn on Logminer for the view and create a primary key.
+In this case, we build a materialized view of the same SELECT/JOIN above.  Debezium, and subsequently RE/RDI, can perform CDC on this view if we also turn on Logminer for the view and create a primary key.
 #### View Construction
 ```sql
 CREATE MATERIALIZED VIEW RockView
