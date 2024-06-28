@@ -1,6 +1,11 @@
-services:
+networks:
+  rdi-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.20.0/24
 
-  #RE Cluster - Node 1
+services:
   re1:
     image: redislabs/redis:latest
     container_name: re1
@@ -8,79 +13,50 @@ services:
     tty: true
     cap_add: 
       - sys_resource
-    profiles: ["oracle"]
     ports:
-      - "12000:12000"
-      - "8443:8443"
-      - "9443:9443"
+      - 12000:12000
+      - 12001:12001
+      - 8443:8443
+      - 9443:9443
     networks:
-      re_cluster:
+      rdi-net:
         ipv4_address: 192.168.20.2
-
-  #RE Cluster - Node 2
-  re2:
-    image: redislabs/redis:latest
-    container_name: re2
-    restart: unless-stopped
-    tty: true
-    cap_add: 
-      - sys_resource
-    profiles: ["oracle"]
-
-    networks:
-      re_cluster:
-        ipv4_address: 192.168.20.3
-
-  #RE Cluster - Node 3
-  re3:
-    image: redislabs/redis:latest
-    container_name: re3
-    restart: unless-stopped
-    tty: true
-    cap_add: 
-      - sys_resource
-    profiles: ["oracle"]
-    ports:
-      - "13000:13000"
-    networks:
-      re_cluster:
-        ipv4_address: 192.168.20.4
 
   oracle:
     image: container-registry.oracle.com/database/enterprise:latest
     container_name: oracle
     ports:
-     - 1521:1521
+     - 1521
     environment:
      - ORACLE_SID=ORCLCDB 
      - ORACLE_EDITION=enterprise
      - ORACLE_PWD=Password1
-     - INIT_SGA_SIZE=1024
-     - INIT_PGA_SIZE=1024
+     - INIT_SGA_SIZE=1616M
+     - INIT_PGA_SIZE=1616M
     volumes:
       - $PWD/oracle/scripts:/opt/oracle/scripts/startup
-    profiles: ["oracle"]
+    healthcheck:
+      test: /opt/oracle/checkDBStatus.sh
+      interval: 30s
+      timeout: 1s
+      retries: 5
+      start_period: 10m
+      start_interval: 30s
     networks:
-      re_cluster:
-        ipv4_address: 192.168.20.5
+      rdi-net:
+        ipv4_address: 192.168.20.3
 
-  debezium:
+  rdi:
     build: 
-      context: $PWD/debezium
-    container_name: debezium
-    volumes:
-      - $PWD/debezium/application.properties:/debezium/conf/application.properties
-    profiles: ["debezium"]
+      context: $PWD/rdi
+    container_name: rdi
+    privileged: true
+    restart: on-failure
+    depends_on:
+      re1:
+        condition: service_started
+      oracle:
+        condition: service_healthy
     networks:
-      re_cluster:
-        ipv4_address: 192.168.20.6
-
-#Docker Networks
-networks:
-  re_cluster:
-    name: re_network
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.20.0/24
+      rdi-net:
+        ipv4_address: 192.168.20.4

@@ -1,0 +1,4 @@
+#!/bin/bash
+redis-cli -p 12000 FT.DROPINDEX idx
+redis-cli -p 12000 FT.CREATE idx ON JSON PREFIX 1 customer: SCHEMA $.COUNTRY AS Country TAG $.CUSTOMERID AS CustomerId NUMERIC SORTABLE
+redis-cli -p 12000 FT.SEARCH idx "-@Country:{USA}" RETURN 4 $.CUSTOMERID $.FIRSTNAME $.LASTNAME $.COUNTRY SORTBY CustomerId LIMIT 0 5
