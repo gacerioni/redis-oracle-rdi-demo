@@ -1,3 +1,0 @@
-FT.CREATE idx ON JSON PREFIX 1 employee: SCHEMA $.TITLE AS Title TAG
-
-FT.SEARCH idx "@Title:{Sales Support Agent}" RETURN 2 $.LASTNAME $.FIRSTNAME

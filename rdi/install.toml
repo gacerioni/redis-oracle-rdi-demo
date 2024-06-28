@@ -1,0 +1,19 @@
+title = "RDI Silent Installer Config"
+
+high_availability = false
+scaffold = false
+deploy = true
+db_index = 2
+deploy_directory = "/opt/rdi/config"
+
+[rdi.cluster]
+host = "192.168.20.2"
+port = 9443
+username = "redis@redis.com"
+password = "redis"
+
+[rdi.database]
+host = "192.168.20.2"
+port = 12001
+use_existing_rdi = false
+password = "redis"
