@@ -18,6 +18,8 @@ services:
       - 12001:12001
       - 8443:8443
       - 9443:9443
+    volumes:
+      - $PWD/redis-cli/scenarios:/opt/scenarios
     networks:
       rdi-net:
         ipv4_address: 192.168.20.2
@@ -35,6 +37,7 @@ services:
      - INIT_PGA_SIZE=1616M
     volumes:
       - $PWD/oracle/scripts:/opt/oracle/scripts/startup
+      - $PWD/sqlplus/scenarios:/opt/scenarios
     healthcheck:
       test: /opt/oracle/checkDBStatus.sh
       interval: 30s

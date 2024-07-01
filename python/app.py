@@ -31,7 +31,7 @@ def scenario_1(client:Redis):
         .group_by('@BillingCountry', reducers.count().alias('Invoices'))\
         .sort_by(Desc('@Invoices'), max=5)
     result = client.ft(INDEX).aggregate(request)
-    print('\n***Scenario 1***')
+    print('\nScenario 1 - Which countries have the most Invoices?')
     pprint(result.rows)
 
 def scenario_2(client:Redis):
@@ -45,7 +45,7 @@ def scenario_2(client:Redis):
         .group_by('@BillingCity', reducers.sum('@Total').alias('InvoiceDollars'))\
         .sort_by(Desc('@InvoiceDollars'), max=3)
     result = client.ft(INDEX).aggregate(request)
-    print('\n***Scenario 2***')
+    print('\nScenario 2 - Which city has the best customers?')
     pprint(result.rows)
 
 def scenario_3(client:Redis):
@@ -59,7 +59,7 @@ def scenario_3(client:Redis):
         .group_by('@CustomerId', reducers.sum('@Total').alias('Money_Spent'))\
         .sort_by(Desc('@Money_Spent'), max=1)
     result = client.ft(INDEX).aggregate(request)
-    print('\n***Scenario 3***')
+    print('\nScenario 3 - Who is the best customer?')
     pprint(result.rows)
 
 def scenario_4(client:Redis):
@@ -74,7 +74,7 @@ def scenario_4(client:Redis):
         .return_fields('CustomerId', '$.FIRSTNAME', '$.LASTNAME', 'Country')\
         .paging(0,5)
     result = client.ft(INDEX).search(query)
-    print('\n***Scenario 4***')
+    print('\nScenario 4 - Find the first 5 customers by Id who are not in the US.')
     pprint(result.docs)
 
 def scenario_5(client:Redis):
@@ -86,7 +86,7 @@ def scenario_5(client:Redis):
     query = Query('@Title:{Sales Support Agent}')\
         .return_fields('$.LASTNAME', '$.FIRSTNAME')
     result = client.ft(INDEX).search(query)
-    print('\n***Scenario 5***')
+    print('\nScenario 5 - Which employees are Sales Agents?')
     pprint(result.docs)
 
 def scenario_6(client:Redis):
@@ -98,7 +98,7 @@ def scenario_6(client:Redis):
     request = AggregateRequest('@InvoiceId:[37 37]')\
         .group_by([], reducers.count().alias('Count'))
     result = client.ft(INDEX).aggregate(request)
-    print('\n***Scenario 6***')
+    print('\nScenario 6 - What is the count of line items for Invoice ID 37?')
     pprint(result.rows)
 
 def scenario_7(client:Redis):
@@ -111,19 +111,19 @@ def scenario_7(client:Redis):
         .sort_by('Songs', asc=False)\
         .paging(0,10)
     result = client.ft(INDEX).search(query)
-    print('\n***Scenario 7***')
+    print('\nScenario 7 - Which artists have written the most Rock music?')
     for doc in result.docs:
         print(doc.json)
 
 if __name__ == '__main__':
     client:Redis = Redis(host='localhost', port=12000, encoding='utf-8', decode_responses=True)
     
-    scenario_1(client)
-    scenario_2(client)
-    scenario_3(client)
+    #scenario_1(client)
+    #scenario_2(client)
+    #scenario_3(client)
     scenario_4(client)
-    scenario_5(client)
-    scenario_6(client)
-    scenario_7(client)
+    #scenario_5(client)
+    #scenario_6(client)
+    #scenario_7(client)
 
     client.close()
