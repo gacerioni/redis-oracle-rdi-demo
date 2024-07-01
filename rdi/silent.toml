@@ -3,7 +3,7 @@ title = "RDI Silent Installer Config"
 high_availability = false
 scaffold = false
 deploy = true
-db_index = 2
+db_index = 5
 deploy_directory = "/opt/rdi/config"
 
 [rdi.cluster]

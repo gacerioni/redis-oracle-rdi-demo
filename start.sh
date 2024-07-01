@@ -5,4 +5,4 @@ docker exec -it re1 /opt/redislabs/bin/rladmin cluster create name cluster.local
 sleep 5
 curl -s -o /dev/null -k -u "redis@redis.com:redis" https://localhost:9443/v1/bdbs -H "Content-Type:application/json" -d @redb.json
 sleep 1
-docker exec -it rdi /bin/sh -c 'cd rdi_install/* && ./install.sh -f /opt/rdi_stage/install.toml'
+docker exec -it rdi /bin/sh -c 'cd rdi_install/* && ./install.sh -f /opt/rdi_stage/silent.toml'
