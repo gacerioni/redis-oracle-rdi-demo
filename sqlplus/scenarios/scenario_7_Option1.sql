@@ -1,11 +1,12 @@
 -- ----------------------------
 --  Which artists have written the most Rock music?
 -- ----------------------------
-set lines 256;
-set trimout on;
-set tab off;
-set pagesize 100;
-set colsep " | ";
+SET lines 256;
+SET trimout on;
+SET tab off;
+SET pagesize 100;
+SET colsep " | ";
+COLUMN name FORMAT A50;
 
 SELECT Artist.ArtistId AS artistId, Artist.Name AS name, COUNT(Track.Name) AS Songs 
 FROM Artist 

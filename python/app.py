@@ -118,12 +118,12 @@ def scenario_7(client:Redis):
 if __name__ == '__main__':
     client:Redis = Redis(host='localhost', port=12000, encoding='utf-8', decode_responses=True)
     
-    #scenario_1(client)
-    #scenario_2(client)
-    #scenario_3(client)
+    scenario_1(client)
+    scenario_2(client)
+    scenario_3(client)
     scenario_4(client)
-    #scenario_5(client)
-    #scenario_6(client)
-    #scenario_7(client)
+    scenario_5(client)
+    scenario_6(client)
+    scenario_7(client)
 
     client.close()
