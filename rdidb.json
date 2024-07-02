@@ -1,0 +1,8 @@
+{
+    "name": "rdidb",
+    "type": "redis",
+    "memory_size": 15000000,
+    "port": 12001,
+    "authentication_redis_pass": "redis",
+    "shard_key_regex": [{"regex": ".*\\{(?<tag>.*)\\}.*"}, {"regex": "(?<tag>.*)"}]
+}

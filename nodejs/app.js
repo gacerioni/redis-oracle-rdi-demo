@@ -228,5 +228,6 @@ async function scenario_7(client) {
     await scenario_5(client);
     await scenario_6(client);
     await scenario_7(client);
+    
     await client.disconnect();
 })();
