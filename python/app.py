@@ -10,7 +10,6 @@ from pprint import pprint
 
 INDEX='idx'
 
-
 def build_index(client, idx_def, schema):
     try:
         client.ft(INDEX).dropindex()
