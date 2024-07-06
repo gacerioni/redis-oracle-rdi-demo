@@ -186,20 +186,6 @@ async function scenario_6(client) {
 }
 
 async function scenario_7(client) {
-/*
-    idx_def = IndexDefinition(index_type=IndexType.JSON, prefix=['rockview:'])
-    schema = [
-        NumericField('$.SONGS', as_name='Songs', sortable=True)
-    ]
-    build_index(client, idx_def, schema)
-    query = Query('*')\
-        .sort_by('Songs', asc=False)\
-        .paging(0,10)
-    result = client.ft(INDEX).search(query)
-    print('\n***Scenario 7***')
-    for doc in result.docs:
-        print(doc.json)
-*/
     const idx_def = {ON: 'JSON', PREFIX: 'rockview:'};
     const schema = {
         '$.SONGS': { type: SchemaFieldTypes.NUMERIC, AS: 'Songs', SORTABLE: true },
