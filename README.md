@@ -11,7 +11,7 @@
 This is a series of comparisons of equivalent SQL and Redis Search commands against the Chinook dataset.  Oracle Enterprise (OE) is used as the relational database with Redis Data Integration (RDI) used to populate a Redis Enterprise (RE) database via Change Data Capture (CDC.)
 
 ## Features <a name="features"></a>
-- Builds out a full RE with RDI and OE environment to include:  3-node RE Cluster, 1-node OE, RDI, and Debezium.
+- Builds out a full RE with RDI and OE environment to include:  1-node RE Cluster, 1-node OE, and RDI.
 
 ## Prerequisites <a name="prerequisites"></a>
 - Ubuntu 20.x
