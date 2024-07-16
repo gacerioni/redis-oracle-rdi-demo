@@ -2,15 +2,15 @@ sources:
   oracle:
     type: cdc
     logging:
-      level: info
+      level: debug
     connection:
       type: oracle
-      host: 192.168.20.3
+      host: localhost
       port: 1521
       user: c##dbzuser
       password: dbz
     advanced:
-      source: 
+      source:
         database.dbname: ORCLCDB
         database.pdb.name: ORCLPDB1
         decimal.handling.mode: precise
@@ -22,5 +22,6 @@ targets:
   target:
     connection:
       type: redis
-      host: 192.168.20.2
+      host: localhost
       port: 12000
+      password: secret42
